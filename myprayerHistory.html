@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Namaz History</title>
+  <link rel="stylesheet" href="myprayersHistory.css">
+</head>
+<body onload=" Checkingroute() ;  getLastNDates() ; FetchingPrayersHistory() ; UpdatingPrayerHistoryStatus()">
+  <h2>Namaz History</h2>
+ <header>
+    <div class="header-left">
+      <img src="Images/Mosque icon, simple style.jpeg" alt="Majid Logo">
+      <div class="marquee">
+        <p>🕌 Welcome to Namaz History Tracker | Stay consistent in your prayers 🕌</p>
+      </div>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="./Dashboard.html">Home</a>
+      <a href="./myprayerHistory.html">My Prayers History</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+ 
+  <select id="range">
+    <option value="7">Last 7 Days</option>
+    <option value="30">Last 30 Days</option>
+  </select>
+
+
+  <div id="historyContainer"></div>
+
+
+  <script type="module" src="myprayerHistory.js"></script>
+</body>
+</html>

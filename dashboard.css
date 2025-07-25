@@ -1,0 +1,150 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f3f3f3;
+}
+
+.marquee {
+  width: 100%;
+  background-color: #232f3e;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 12s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+.navbarContainer {
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.navbarContainer ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.navbarContainer li {
+  margin: 0.5rem;
+}
+
+.navbarContainer a, .logout {
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+button {
+  transition: background-color 0.3s ease;
+}
+
+.navbarContainer a:hover, .logout:hover {
+  color: #f08804;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.date-heading {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #232f3e;
+  margin-bottom: 2rem;
+}
+
+.prayers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.prayer-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.prayer-card:hover {
+  transform: scale(1.02);
+}
+
+.prayer-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+}
+
+.prayer-card button {
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.prayer-card button:first-of-type {
+  background-color: #ddd;
+}
+
+.prayer-card button:last-of-type {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.prayer-card button:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .date-heading {
+    font-size: 1rem;
+  }
+}

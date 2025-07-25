@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Namaz Tracking App - Login</title>
+  <link rel="stylesheet" href="login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+</head>
+<body onload="Checking()">
+
+  <div class="login-container">
+    <h1>Sign In</h1>
+    <input type="email" placeholder="Enter your Email" id="email" />
+    <input type="password" placeholder="Enter your Password" id="password" />
+    <button onclick="window.loginHandler()">Login</button>
+    <p>Don't have an account? <a href="./singup.html">Sign up</a></p>
+  </div>
+
+  <script type="module" src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Namaz Tracking App - Signup</title>
+  <link rel="stylesheet" href="signup.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+</head>
+<body onload="Checking()">
+  <div class="signup-container">
+    <h1>Create Account</h1>
+    <input type="text" placeholder="Enter your First name" id="firstname" />
+    <input type="text" placeholder="Enter your Last name" id="lastname" />
+    <input type="email" placeholder="Enter your Email" id="email" />
+    <input type="text" placeholder="Enter your Username" id="username" />
+    <input type="password" placeholder="Enter your Password" id="password" />
+    <button onclick="window.userAccount()">Sign Up</button>
+    <p>Already have an account? <a href="./login.html">Login</a></p>
+  </div>
+
+  <script type="module" src="singup.js"></script>
+</body>
+</html>
