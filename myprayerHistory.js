@@ -66,11 +66,11 @@ let FetchingPrayersHistory = async () => {
           <div class="prayer-day-card">
             <h3 class="date-heading"> ${dateOfThisRecord}</h3>
             <div class="prayers-grid">
-              <div class="prayer-card"><h3>Fajr</h3><img src="Images/Fajar.jpg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
-              <div class="prayer-card"><h3>Zuhur</h3><img src="Images/Zuhur.jpg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
-              <div class="prayer-card"><h3>Asar</h3><img src="Images/Asar.jpg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
-              <div class="prayer-card"><h3>Maghrib</h3><img src="Images/maghrib.jpg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
-              <div class="prayer-card"><h3>Isha</h3><img src="Images/isha.jpg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
+              <div class="prayer-card"><h3>Fajr</h3><img src="Images/fajar 2.jpeg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
+              <div class="prayer-card"><h3>Zuhur</h3><img src="Images/zuhur 2.jpeg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
+              <div class="prayer-card"><h3>Asar</h3><img src="Images/Asar 2.jpeg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
+              <div class="prayer-card"><h3>Maghrib</h3><img src="Images/maghrib 2.jpeg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
+              <div class="prayer-card"><h3>Isha</h3><img src="Images/isha 3.jpeg"><button class="miss">❌ Miss</button><button class="done">✅ Done</button></div>
             </div>
           </div>
         `;

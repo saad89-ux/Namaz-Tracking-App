@@ -8,70 +8,68 @@
   <link rel="stylesheet" href="navbar.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 </head>
-<body onload="Checkingroute(); fetchuserData(); checkingStatus()">
+<body>
 
   <header class="navbar">
-  <div class="logo">
-    <img src="Images/0b971707-ac5f-47e0-9a95-24a7d0f555ef.jpeg" alt="">
-    <span>Namaz Tracker App</span>
-  </div>
+    <div class="logo">
+      <img src="Images/0b971707-ac5f-47e0-9a95-24a7d0f555ef.jpeg" alt="">
+      <span>Namaz Tracker App</span>
+    </div>
 
-  <nav class="nav-links" id="navLinks">
-    <a href="./Dashboard.html">Home</a>
-    <a href="./myprayerHistory.html">My Prayers History</a>
-    <a href="#" onclick="logout()">Logout</a>
-  </nav>
+    <nav class="nav-links" id="navLinks">
+      <a href="./Dashboard.html">Home</a>
+      <a href="./myprayerHistory.html">My Prayers History</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
 
-  <div class="burger" onclick="toggleMenu()">☰</div>
-</header>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </header>
 
-
-<marquee class="announcement">📢 Stay consistent with your Namaz — May Allah bless you! 🤲</marquee>
-
+  <marquee class="announcement">📢 Stay consistent with your Namaz — May Allah bless you! 🤲</marquee>
 
   <main class="dashboard-container">
     <h2 class="date-heading" id="TodaysDate">DD/MM/YYYY</h2>
     <h2 class="title">Track Your Prayer Status</h2>
 
     <div class="prayers-grid">
-     
       <div class="prayer-card">
         <h3>Fajr</h3>
-        <img src="Images/Fajar.jpg" alt="Fajr Prayer" />
+        <img src="Images/fajar 2.jpeg" alt="Fajr Prayer" />
         <button class="miss">❌ Miss</button>
         <button class="done">✅ Done</button>
       </div>
 
       <div class="prayer-card">
         <h3>Zuhur</h3>
-        <img src="Images/Zuhur.jpg" alt="Zuhur Prayer" />
+        <img src="Images/zuhur 2.jpeg" alt="Zuhur Prayer" />
         <button class="miss">❌ Miss</button>
         <button class="done">✅ Done</button>
       </div>
 
       <div class="prayer-card">
         <h3>Asar</h3>
-        <img src="Images/Asar.jpg" alt="Asar Prayer" />
+        <img src="Images/Asar 2.jpeg" alt="Asar Prayer" />
         <button class="miss">❌ Miss</button>
         <button class="done">✅ Done</button>
       </div>
 
       <div class="prayer-card">
         <h3>Maghrib</h3>
-        <img src="Images/maghrib.jpg" alt="Maghrib Prayer" />
+        <img src="Images/maghrib 2.jpeg" alt="Maghrib Prayer" />
         <button class="miss">❌ Miss</button>
         <button class="done">✅ Done</button>
       </div>
 
       <div class="prayer-card">
         <h3>Isha</h3>
-        <img src="Images/isha.jpg" alt="Isha Prayer" />
+        <img src="Images/isha 3.jpeg" alt="Isha Prayer" />
         <button class="miss">❌ Miss</button>
         <button class="done">✅ Done</button>
       </div>
     </div>
   </main>
 
+  <!-- Only Load Dashboard.js -->
   <script type="module" src="Dashboard.js"></script>
 </body>
 </html>

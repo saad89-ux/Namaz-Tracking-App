@@ -1,44 +1,29 @@
-
 import {
-  app,
   db,
-  collection,
-  addDoc,
-  getDocs,
-  getDoc,
   doc,
-  deleteDoc,
-  updateDoc,
-  setDoc
+  getDoc,
+  setDoc,
 } from "./Fireapp.js";
 
 let UserData;
 
+let Checkingroute = () => {
+  let uid = localStorage.getItem("uid");
+  if (!uid) {
+    window.location.assign("Login.html");
+  }
+};
 
 let fetchuserData = async () => {
   try {
     let uid = localStorage.getItem("uid");
     let user = await getDoc(doc(db, "users", uid));
     UserData = user.data();
-    console.log(" User fetched:", uid, user.data());
+    console.log("User Data:", UserData);
   } catch (error) {
-    console.log(" Error while fetching user:", error.message);
+    console.log("Error fetching user data:", error.message);
   }
 };
-
-
-let Checkingroute = () => {
-  let uid = localStorage.getItem("uid");
-  if (!uid) {
-    window.location.assign("/Login.html");
-  }
-};
-
-
-let getFirestoreDateKey = () => {
-  return new Date().toISOString().split("T")[0];
-};
-
 
 let getTodayDate = () => {
   let today = new Date();
@@ -48,131 +33,98 @@ let getTodayDate = () => {
   return `${day}/${month}/${year}`;
 };
 
+let getFirestoreDateKey = () => {
+  return new Date().toISOString().split("T")[0]; 
+};
 
 let Assigingdate = document.getElementById("TodaysDate");
 Assigingdate.innerHTML = `Today: ${getTodayDate()}`;
 
-
 let checkingStatus = async () => {
-  try {
-    let uid = localStorage.getItem("uid");
-    if (!uid) {
-      console.error("User UID not found in localStorage");
-      return;
-    }
+  let uid = localStorage.getItem("uid");
+  if (!uid) return;
 
-    let todayKey = getFirestoreDateKey();
-    let prayerDocRef = doc(db, "users", uid, "prayers", todayKey);
+  let todayKey = getFirestoreDateKey();
+  let prayerDocRef = doc(db, "users", uid, "prayers", todayKey);
 
-    let defaultStatus = {
-      fajr: false,
-      zuhur: false,
-      asar: false,
-      maghrib: false,
-      isha: false,
-    };
+  let defaultStatus = {
+    fajr: false,
+    zuhur: false,
+    asar: false,
+    maghrib: false,
+    isha: false,
+  };
 
-    let docSnap = await getDoc(prayerDocRef);
-    let Allstatus = {};
+  let docSnap = await getDoc(prayerDocRef);
+  let Allstatus = docSnap.exists() ? { ...defaultStatus, ...docSnap.data() } : defaultStatus;
 
-    if (docSnap.exists()) {
-      Allstatus = { ...defaultStatus, ...docSnap.data() };
-      console.log("Prayer data found:", Allstatus);
-    } else {
-      Allstatus = defaultStatus;
-      await setDoc(prayerDocRef, Allstatus);
-      console.log("New prayer doc created:", Allstatus);
-    }
-
-    RenderingToggleButtons(Allstatus, prayerDocRef);
-
-  } catch (error) {
-    console.log("Error in checkingStatus:", error.message);
+  if (!docSnap.exists()) {
+    await setDoc(prayerDocRef, Allstatus);
   }
+
+  RenderingToggleButtons(Allstatus, prayerDocRef);
 };
- 
 
 let RenderingToggleButtons = (Allstatus, docRef) => {
-  if (!Allstatus) {
-    console.error(" No data to show prayer buttons.");
-    return;
-  }
-
-  const prayerCards = document.querySelectorAll(".prayer-card");
+  let prayerCards = document.querySelectorAll(".prayer-card");
 
   prayerCards.forEach((card) => {
-    const prayerName = card.querySelector("h3").innerText.toLowerCase().trim();
-    const missBtn = card.querySelector(".miss");
-    const doneBtn = card.querySelector(".done");
+    let prayerName = card.querySelector("h3").innerText.toLowerCase().trim();
+    let missBtn = card.querySelector(".miss");
+    let doneBtn = card.querySelector(".done");
 
-    if (!Allstatus.hasOwnProperty(prayerName)) {
-      console.warn(` Prayer "${prayerName}" not in data.`);
-      return;
-    }
-
-    
     if (Allstatus[prayerName]) {
-      doneBtn.style.backgroundColor = "darkgreen";
-      missBtn.style.backgroundColor = "gray";
+      doneBtn.style.display = "inline-block";
       missBtn.style.display = "none";
+      doneBtn.style.backgroundColor = "darkgreen";
     } else {
-      doneBtn.style.backgroundColor = "gray";
-      missBtn.style.backgroundColor = "red";
+      missBtn.style.display = "inline-block";
       doneBtn.style.display = "none";
+      missBtn.style.backgroundColor = "red";
     }
 
-
-    if (!doneBtn.dataset.attached) {
+    if (!doneBtn.dataset.bound) {
       doneBtn.addEventListener("click", async () => {
-        console.log(` ${prayerName.toUpperCase()} marked as DONE`,Allstatus);
-        Allstatus[prayerName] = true;
-        await setDoc(docRef, Allstatus);
-        doneBtn.style.backgroundColor = "darkgreen";
-        missBtn.style.backgroundColor = "gray";
-        missBtn.style.display = "none"; 
-        missBtn.style.display = "none";
-      });
-      doneBtn.dataset.attached = "true";
-    }
-
-    if (!missBtn.dataset.attached) {
-      missBtn.addEventListener("click", async () => {
-        console.log(` ${prayerName.toUpperCase()} marked as MISSED`,Allstatus);
         Allstatus[prayerName] = false;
         await setDoc(docRef, Allstatus);
-        missBtn.style.backgroundColor = "red";
-        doneBtn.style.backgroundColor = "gray";
         doneBtn.style.display = "none";
+        missBtn.style.display = "inline-block";
+        missBtn.style.backgroundColor = "red";
+        console.log(`${prayerName} marked as MISSED`);
       });
-      missBtn.dataset.attached = "true";
+      doneBtn.dataset.bound = "true";
+    }
+
+    if (!missBtn.dataset.bound) {
+      missBtn.addEventListener("click", async () => {
+        Allstatus[prayerName] = true;
+        await setDoc(docRef, Allstatus);
+        missBtn.style.display = "none";
+        doneBtn.style.display = "inline-block";
+        doneBtn.style.backgroundColor = "darkgreen";
+        console.log(`${prayerName} marked as DONE`);
+      });
+      missBtn.dataset.bound = "true";
     }
   });
-}
+};
 
 window.toggleMenu = function () {
   const nav = document.getElementById("navLinks");
   nav.classList.toggle("active");
 };
 
-window.logout = function () {
-  localStorage.removeItem("uid");
-  window.location.href = "./login.html";
-};
-
-
-window.RenderingToggleButtons = RenderingToggleButtons;
-window.checkingStatus = checkingStatus;
-window.fetchuserData = fetchuserData;
-window.getTodayDate = getTodayDate;
-window.Checkingroute = Checkingroute;
-window.getFirestoreDateKey = getFirestoreDateKey;
-
 
 window.addEventListener("DOMContentLoaded", () => {
-  Checkingroute();         
-  fetchuserData();         
-  checkingStatus();  
-  getTodayDate();   
-  getFirestoreDateKey();
-}); 
+  Checkingroute();
+  fetchuserData();
+  checkingStatus();
+});
 
+
+ let logout=()=> {
+  localStorage.removeItem("uid");
+  window.location.href = "./login.html";
+}
+
+window.logout = logout;
